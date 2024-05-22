@@ -62,3 +62,17 @@ def convert_large_numbers(n):
         return (convert_thousands(millions) + "-million" + 
                 ("s" if millions > 1 else "") + 
                 (("-" + convert_large_numbers(n % 1000000)) if n % 1000000 != 0 else ""))
+
+def number_to_french(n):
+    if n < 0:
+        raise ValueError("Number must be non-negative")
+    elif n < 17:
+        return convert_units(n)
+    elif n < 100:
+        return convert_tens(n)
+    elif n < 1000:
+        return convert_hundreds(n)
+    elif n < 1000000:
+        return convert_thousands(n)
+    else:
+        return convert_large_numbers(n)
