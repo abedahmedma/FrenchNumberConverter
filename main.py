@@ -28,3 +28,13 @@ def convert_tens(n):
             return "quatre-vingt-onze"
         return "quatre-vingt" + (("s" if n == 80 else "") + (("-" + UNITS[n % 10]) if n % 10 != 0 else ""))
     return ""
+
+def convert_hundreds(n):
+    if n < 100:
+        return convert_tens(n)
+    elif n == 100:
+        return "cent"
+    else:
+        return (UNITS[n // 100] + "-cent" + 
+                (("s" if n % 100 == 0 and n // 100 > 1 else "") + 
+                (("-" + convert_tens(n % 100)) if n % 100 != 0 else "")))
