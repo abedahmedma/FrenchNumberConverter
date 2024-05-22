@@ -48,3 +48,17 @@ def convert_thousands(n):
         thousands = n // 1000
         return (convert_hundreds(thousands) + "-mille" + 
                 (("-" + convert_hundreds(n % 1000)) if n % 1000 != 0 else ""))
+
+def convert_large_numbers(n):
+    if n < 1000000:
+        if n < 10000:
+            return convert_thousands(n)
+        else:
+            thousands = n // 1000
+            return (convert_thousands(thousands) + "-mille" + 
+                    (("-" + convert_hundreds(n % 1000)) if n % 1000 != 0 else ""))
+    else:
+        millions = n // 1000000
+        return (convert_thousands(millions) + "-million" + 
+                ("s" if millions > 1 else "") + 
+                (("-" + convert_large_numbers(n % 1000000)) if n % 1000000 != 0 else ""))
