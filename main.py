@@ -6,3 +6,25 @@ TENS = ["", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "soix
 
 def convert_units(n):
     return UNITS[n]
+
+
+def convert_tens(n):
+    if n < 17:
+        return convert_units(n)
+    elif n < 20:
+        return "dix-" + UNITS[n - 10]
+    elif n < 70:
+        if n % 10 == 1 and n != 11:
+            return TENS[n // 10] + "-et-un"
+        return TENS[n // 10] + (("-" + UNITS[n % 10]) if n % 10 != 0 else "")
+    elif n < 80:
+        if n == 71:
+            return "soixante-et-onze"
+        return "soixante-" + convert_tens(n - 60)
+    elif n < 100:
+        if n == 81:
+            return "quatre-vingt-un"
+        if n == 91:
+            return "quatre-vingt-onze"
+        return "quatre-vingt" + (("s" if n == 80 else "") + (("-" + UNITS[n % 10]) if n % 10 != 0 else ""))
+    return ""
