@@ -38,3 +38,13 @@ def convert_hundreds(n):
         return (UNITS[n // 100] + "-cent" + 
                 (("s" if n % 100 == 0 and n // 100 > 1 else "") + 
                 (("-" + convert_tens(n % 100)) if n % 100 != 0 else "")))
+
+def convert_thousands(n):
+    if n < 1000:
+        return convert_hundreds(n)
+    elif n == 1000:
+        return "mille"
+    else:
+        thousands = n // 1000
+        return (convert_hundreds(thousands) + "-mille" + 
+                (("-" + convert_hundreds(n % 1000)) if n % 1000 != 0 else ""))
